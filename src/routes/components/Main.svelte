@@ -5,26 +5,13 @@
     import Skills from "./Skills.svelte";
     import OtherProjects from "./OtherProjects.svelte";
     import Contact from "./Contact.svelte";
+    import ShortBio from "./ShortBio.svelte";
     import { Section, Schedule, ScheduleItem } from 'flowbite-svelte-blocks';
-    import { Button, Modal } from 'flowbite-svelte';
+    import { Button, Modal, GradientButton } from 'flowbite-svelte';
     import { writable } from "svelte/store";
+    import { slide, fly } from "svelte/transition";
 
     let showResume = writable(false);
-
-    const schedule = [
-		{ time: 'Name',
-			href: '/',
-			title: 'Rehaan Anjaria' }, 
-        { time: 'Age',
-			href: '/',
-			title: '18' }, 
-        { time: 'Education',
-			href: '/',
-			title: 'University of Southern California (USC), Majoring in Computational Linguistics, Class of \'29' },
-        { time: 'Interests',
-			href: '/',
-			title: 'Creating tech for good | Problem Solving | Civic Tech' }
-	];
 </script>
 
 <style>
@@ -59,23 +46,19 @@
     }
 </style>
 
-<Modal class="min-w-full" open={$showResume} on:close={() => {showResume.set(false); }} size="xl">
+<Modal class="min-w-full" bind:open={$showResume} transition={slide} size="xl">
 
-    <iframe src="https://drive.google.com/file/d/1ZlbH1PsSHRNxpD8lfHWwnNZrW-kQUo5E/view?usp=sharing" width="500" height="500" allowfullscreen></iframe>
+    <iframe title="Rehaan Anjaria Resume" src="https://drive.google.com/file/d/1ZlbH1PsSHRNxpD8lfHWwnNZrW-kQUo5E/view?usp=sharing" width="500" height="500" allowfullscreen></iframe>
 
 </Modal>
 
 <div class="aboutmewrapper">
 
     <Section name="schedule" sectionClass="bg-white bg-gray-900 antialiased">
-        <Schedule scheduleName="Rehaan Anjaria">
-            {#each schedule as item}
-                <ScheduleItem {item} />
-            {/each}
-        </Schedule>
+        <ShortBio></ShortBio>
 
         <div class="resume-button">
-            <Button color="green" on:click={() => {alert("rehaan");}}>My resume</Button>
+            <button style="cursor:pointer; color:white; border:1px solid white; border-radius: 5px; padding: 1rem;" on:click={() => showResume.set(true)}>My resume</button>
         </div>
 
     </Section>

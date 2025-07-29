@@ -1,70 +1,77 @@
-<script lang="ts">
-	import { Section } from 'flowbite-svelte-blocks';
-	import { Label, Input, Button, Select, Textarea } from 'flowbite-svelte';
-    import { writable } from "svelte/store";
+<script lang="js">
+// @ts-nocheck
 
-    let showPage = writable(false);
+    import { onMount } from 'svelte';
+	import { Section } from 'flowbite-svelte-blocks';
+	import { Label, Input, Button, Select, Textarea, Spinner } from 'flowbite-svelte';
+    import { writable } from "svelte/store";
+    import { addDocument, getDocuments, getAllColls } from "$lib/model"
+    import AllInfo from "./components/AllInfo.svelte";
+    import AddInfo from "./components/AddInfo.svelte";
+
     let cp = import.meta.env.VITE_RA;
 
+    let showPage = writable(false);
+    let ready = writable(false);
+    let saveLoading = writable(false);
+    let loading = writable(false);
+    let successMessage = writable("");
+
+    let allColls = [];
+    let useColl = "";
+
+    let moreData = [];
+
     let currPass = "";
+
+    let dataCount = 0;
 
     const handlePassSubmit = () => {
         if (currPass == cp) showPage.set(true);
     }
 
-	const handleSubmit = () => {
-		alert('Form submited.');
+	const handleSubmit = async () => {
+        loading.set(true);
+        const data = {
+            collection: useColl,
+            moreData: moreData
+        };
+        const res = await addDocument(data);
+        console.log(res);
+        loading.set(false);
+        moreData = [];
+        useColl = "";
+        dataCount = 0;
 	};
-	let selected = $state();
-	let countries = [
-		{ value: 'tv', name: 'TV/Monitors' },
-		{ value: 'pc', name: 'PC' },
-		{ value: 'phone', name: 'Phones' }
-	];
+
+    onMount(async () => {
+        allColls = await getAllColls();
+        console.log(allColls);
+        for (let i = 0; i < allColls.length; i++) {
+            console.log(await getDocuments(allColls[i].value));
+        }
+    })
+    
 </script>
 
 <style>
-    .formwrapper {
-        margin: 5rem;
+    * {
+        background-color: rgb(173, 225, 236);
+        color: black;
     }
+
+    /* .formwrapper {
+        margin: 5rem;
+    } */
 </style>
 
-{#if $showPage}
+<a href="/">Go Home</a>
 
-    <div class="formwrapper">
-        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add a new product</h2>
-        <form onsubmit={handleSubmit}>
-            <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                <div class="sm:col-span-2">
-                    <Label for="name" class="mb-2">Product Name</Label>
-                    <Input type="text" id="name" placeholder="Type product name" required />
-                </div>
-                <div class="w-full">
-                    <Label for="brand" class="mb-2">Brand</Label>
-                    <Input type="text" id="brand" placeholder="Product brand" required />
-                </div>
-                <div class="w-full">
-                    <Label for="price" class="mb-2">Price</Label>
-                    <Input type="text" id="price" placeholder="$29999" required />
-                </div>
-                <div class="w-full">
-                    <Label
-                        >Category
-                        <Select class="mt-2" items={countries} bind:value={selected} required />
-                    </Label>
-                </div>
-                <div class="w-full">
-                    <Label for="weight" class="mb-2">Item Weight (kg)</Label>
-                    <Input type="text" id="weight" placeholder="12" required />
-                </div>
-                <div class="sm:col-span-2">
-                    <Label for="description" class="mb-2">Description</Label>
-                    <Textarea id="description" placeholder="Your description here" rows={4} name="description" required />
-                </div>
-                <Button type="submit" class="w-32">Add product</Button>
-            </div>
-        </form>
-    </div>
+{#if $showPage}
+        
+    <AddInfo></AddInfo>
+
+    <AllInfo></AllInfo>
         
 {:else}
 
