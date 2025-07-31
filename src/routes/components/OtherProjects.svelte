@@ -69,9 +69,6 @@
 		<TeamWrapper>
 			<TeamHeader>
 				{#snippet label()}Other Projects{/snippet}
-				<p class="font-light text-gray-500 sm:text-xl lg:mb-16 dark:text-gray-400">
-					Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind
-				</p>
 			</TeamHeader>
 			<TeamBody>
 				{#each otherProjects as { href, src, alt, name, jobTitle, description }}
