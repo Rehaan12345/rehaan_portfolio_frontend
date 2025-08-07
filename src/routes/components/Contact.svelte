@@ -3,7 +3,7 @@
 	import { Label, Input, Textarea, Button } from 'flowbite-svelte';
 </script>
 
-<Section name="contact" sectionClass="bg-white bg-gray-900">
+<Section name="contact">
 	<Contact>
 		{#snippet h2()}Contact Me{/snippet}
 		<p style="color: white;display:flex; justify-content: center; align-items: center;">

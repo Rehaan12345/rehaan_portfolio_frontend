@@ -65,7 +65,7 @@
 
 {#if $ready}
 
-	<Section name="team" sectionClass="bg-white bg-gray-900">
+	<Section name="team">
 		<TeamWrapper>
 			<TeamHeader>
 				{#snippet label()}Other Projects{/snippet}

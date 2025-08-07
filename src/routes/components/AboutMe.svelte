@@ -1,39 +1,89 @@
 <script lang="js">
-// @ts-nocheck
+    import { onMount } from 'svelte';
+    import { Section, Quotes, Testimonial } from 'flowbite-svelte-blocks';
+    import { getDocuments } from '$lib/model';
+    import { writable } from 'svelte/store';
 
-	import { onMount } from 'svelte';
-	import { Section, Quotes, Testimonial } from 'flowbite-svelte-blocks';
-	import { getDocuments } from '$lib/model';
-	import { writable } from 'svelte/store';
+    let ready = writable(false);
+    let info;
+    let displayedInfo = '';
+    let typingInterval = 15; // ms per character
+    let typingTimeout;
 
-	let ready = writable(false);
-	
-	let info;
+    onMount(async () => {
+        ready.set(false);
+        const aboutDocs = await getDocuments("about");
+        info = aboutDocs[0].info;
+        displayedInfo = '';
+        if (info) {
+            let i = 0;
+            function typeNext() {
+                if (i <= info.length) {
+                    displayedInfo = info.slice(0, i);
+                    i++;
+                    typingTimeout = setTimeout(typeNext, typingInterval);
+                }
+            }
+            typeNext();
+        }
+        ready.set(true);
+    });
 
-	onMount(async () => {
-		ready.set(false);
-		info = await getDocuments("about");
-		info = info[0].info
-		ready.set(true);
-	})
-
+    // Optional: clear timeout if component unmounts
+    // onDestroy(() => clearTimeout(typingTimeout));
 </script>
+
+<style>
+	.quoteimgwrapper {
+		display: flex;
+		justify-content: space-around;
+		gap: 2rem;
+	}
+
+	.quote {
+		min-width: 50%;
+		padding: 1rem;
+	}
+
+	.rehaanimg {
+		max-width: 450px;
+		height: auto;
+		border-radius: 20px;
+		display: block;
+	}
+
+	@media (max-width: 900px) {
+		.rehaanimg {
+			max-width: 80px;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.rehaanimg {
+			max-width: 60px;
+		}
+	}
+</style>
 
 {#if $ready}
 
-	<Section name="testimonial" sectionClass="bg-white bg-gray-900">
+	<Section name="testimonial">
 		<Testimonial Icon={Quotes}>
-			<blockquote>
-				<p class="text-2xl font-medium text-gray-900 dark:text-white">
-					{info}
-				</p>
-			</blockquote>
-			{#snippet footer()}
+			<div class="quoteimgwrapper">
+				<blockquote class="quote">
+					<p class="abt-txt text-2xl font-medium text-gray-300">
+						{displayedInfo}
+					</p>
+				</blockquote>
+				<img class="rehaanimg" src="https://firebasestorage.googleapis.com/v0/b/droneworks-14880.appspot.com/o/goodpfp.png?alt=media&token=d203dde8-d9ac-4101-a96f-0bacad845d0f" alt="RehaanAnjaria">
+			</div>
+			
+			<!-- {#snippet footer()}
 				<img class="h-6 w-6 rounded-full" src="https://firebasestorage.googleapis.com/v0/b/droneworks-14880.appspot.com/o/goodpfp.png?alt=media&token=d203dde8-d9ac-4101-a96f-0bacad845d0f" alt="michael profile" />
 				<div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
 					<div class="pr-3 font-medium text-gray-900 dark:text-white">Rehaan Anjaria</div>
 				</div>
-			{/snippet}
+			{/snippet} -->
 		</Testimonial>
 	</Section>
 

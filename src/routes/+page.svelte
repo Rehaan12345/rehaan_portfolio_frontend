@@ -10,7 +10,7 @@
 
 <style>
 	main {
-		background-color: rgb(55, 55, 55);
+        background: linear-gradient(to bottom, #000000 0%, #EB5757 100%);
 	}
 </style>
 

@@ -4,6 +4,9 @@
 	import { ChartPieSolid, LandmarkSolid, BriefcaseSolid, DollarOutline, RocketSolid, CogOutline } from 'flowbite-svelte-icons';
 	import { getDocuments } from "$lib/model";
 	import { writable } from "svelte/store";
+    import "@selemondev/svelte-marquee/dist/style.css";
+    import { Marquee } from "@selemondev/svelte-marquee";
+	import { Card } from "flowbite-svelte";
 
 	let ready = writable(false);
 
@@ -16,25 +19,37 @@
 	})
 </script>
 
+<style>
+
+	.title-text {
+		margin-left: 5%;
+		color: white;
+		font-size: xx-large;
+	}
+
+	.card-contents {
+		padding: 2rem;
+		/* background: linear-gradient(to right, #0F2027, #203A43, ); */
+		background-color: #edcdcd;
+		height: 100%;
+		/* background-color: aquamarine; */
+		/* border-radius: 50px; */
+	}
+</style>
+
 {#if $ready}
 
-	<Section name="feature" sectionClass="bg-white bg-gray-900">
-		<HeroHeader
-			class="mb-8 max-w-screen-md lg:mb-16"
-			h2Class="mb-4 lg:mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white text-left"
-			pClass="text-gray-500 sm:text-xl dark:text-gray-400 text-left sm:px-0 xl:px-0"
-		>
-			{#snippet h2()}Skills{/snippet}
-			<!-- {#snippet paragraph()}Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.{/snippet} -->
-		</HeroHeader>
-		<FeatureDefault>
-			{#each skills as s}
-				<FeatureItem>
-					{#snippet h3()}{s.title}{/snippet}
-					{#snippet paragraph()}{s.info}{/snippet}
-				</FeatureItem>
-			{/each}
-		</FeatureDefault>
-	</Section>
+	<h2 class="title-text">Skills</h2>
+
+	<Marquee class="py-4 gap-[3rem] [--duration:1s] [--gap:3rem]" innerClassName="gap-[3rem]" pauseOnHover={true} fade={true}>
+		{#each skills as s}
+			<Card class="rounded-lg overflow-hidden">
+				<div class="card-contents">
+					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{s.title}</h5>
+					<p class="leading-tight font-normal text-gray-800">{s.info}</p>
+				</div>
+			</Card>
+		{/each}
+	</Marquee>
 
 {/if}
