@@ -190,6 +190,8 @@
 
 		<div class="img-wrapper">
 			{#each currHover.images as i}
+				<!-- svelte-ignore a11y_click_events_have_key_events -->
+				<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 				<img style="cursor:pointer;" on:click={() => {bigImgUrl.set(i); showBigImg.set(true);}} alt="" src={i}>
 			{/each}
 		</div>
