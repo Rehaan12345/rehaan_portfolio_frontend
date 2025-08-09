@@ -14,7 +14,10 @@
     import { slide, fly } from "svelte/transition";
 	import { ProfileCardOutline, BookOpenOutline } from "flowbite-svelte-icons";
 
+	const URL = import.meta.env.VITE_URL;
+
     let showResume = writable(false);
+	let placement: ModalPlacementType = $state("center");
 
     import { watch } from 'runed';
 	import { onMount } from 'svelte';
@@ -277,17 +280,28 @@
 	.button-text:hover {
 		border-bottom: 1px solid white;
 	}
+
+	.resumemodalwrapper {
+		/* position: fixed; */
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 50; /* keeps it above other elements */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+	}
 </style>
-
-<Modal class="min-w-full" bind:open={$showResume} transition={slide} size="xl">
-
-	<iframe title="Rehaan Anjaria Resume" src="https://drive.google.com/file/d/1ZlbH1PsSHRNxpD8lfHWwnNZrW-kQUo5E/view?usp=sharing" width="500" height="500" allowfullscreen></iframe>
-
-</Modal>
 
 <Nav></Nav>
 
 <div class="{className}" bind:this={canvasContainerRef} aria-hidden="true">
+
+	<!-- <Modal bind:open={$showResume}>
+			<img src="https://firebasestorage.googleapis.com/v0/b/rehaan-portfolio.firebasestorage.app/o/RehaanAnjariaWork.jpg?alt=media&token=c8caf2b5-60a2-427d-879a-baa8bf3761d6" alt="RehaanAnjariaResume">
+	</Modal> -->
     
 	<canvas bind:this={canvasRef} class="size-full absolute z-0 pointer-events-none"></canvas>
 
@@ -295,26 +309,20 @@
 
         <div class="aboutmewrapper">
 
-            <!-- <Section name="schedule" sectionClass="bg-white bg-gray-900 antialiased">
-                <ShortBio></ShortBio>
-
-            
-
-            </Section> -->
-
 			<div id="About">
             	<AboutMe></AboutMe>
 			</div>
-
             
             <div class="buttons-wrapper">
 				<div class="button-select">
 					<!-- svelte-ignore event_directive_deprecated -->
 					<button class="resume-buttom" style="cursor:pointer; color:white; border:1px solid white; border-radius: 5px; padding: 1rem;" on:click={() => showResume.set(true)}>
-						<div class="button-inside">
-							<BookOpenOutline></BookOpenOutline>
-							<div class="button-text">Resume</div>
-						</div>
+						<a href="/RehaanAnjaria.jpg" target="_blank">
+							<div class="button-inside">
+								<BookOpenOutline></BookOpenOutline>
+								<div class="button-text">Resume</div>
+							</div>
+						</a>
 					</button>
 				</div>
 				<div class="button-select">
