@@ -212,7 +212,8 @@
 										<div class="card-contents" role="button" tabindex="0">
 											<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
 												<div class="title-txt-wrapper">
-													<a on:mouseover={() => {currHover = p}} on:focus={() => {currHover = p}} class="title" id="about" href="">
+													<!-- svelte-ignore a11y_invalid_attribute -->
+													<a on:mouseover={() => {currHover = p}} on:focus={() => {currHover = p}} class="title" id="about" href="#">
 														{p.title}
 													</a><ArrowUpRightFromSquareOutline class="shrink-0 h-6 w-6" />
 												</div>
