@@ -12,6 +12,7 @@
     import { Button, Modal, GradientButton } from 'flowbite-svelte';
     import { writable } from "svelte/store";
     import { slide, fly } from "svelte/transition";
+	import { ProfileCardOutline, BookOpenOutline } from "flowbite-svelte-icons";
 
     let showResume = writable(false);
 
@@ -243,14 +244,46 @@
 		height: 100%;
 	}
 
-    .resume-button {
+    .buttons-wrapper {
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         padding-top: 1rem;
+		gap: 2rem;
+		margin-bottom: 4rem;
     }
+
+	.button-inside {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: .5rem;
+	}
+
+	.button-select {
+		transition: all 0.3s ease-in-out;
+	}
+
+	.button-select:hover {
+		transform: scale(1.1);
+		transition: all ease-in-out 0.2s;
+	}
+
+	.button-text {
+		font-size: larger;
+	}
+
+	.button-text:hover {
+		border-bottom: 1px solid white;
+	}
 </style>
+
+<Modal class="min-w-full" bind:open={$showResume} transition={slide} size="xl">
+
+	<iframe title="Rehaan Anjaria Resume" src="https://drive.google.com/file/d/1ZlbH1PsSHRNxpD8lfHWwnNZrW-kQUo5E/view?usp=sharing" width="500" height="500" allowfullscreen></iframe>
+
+</Modal>
 
 <Nav></Nav>
 
@@ -259,12 +292,6 @@
 	<canvas bind:this={canvasRef} class="size-full absolute z-0 pointer-events-none"></canvas>
 
     <div class="wholewholewrapper z-10 text-white" id="wholewholewrapper">
-
-        <Modal class="min-w-full" bind:open={$showResume} transition={slide} size="xl">
-
-            <iframe title="Rehaan Anjaria Resume" src="https://drive.google.com/file/d/1ZlbH1PsSHRNxpD8lfHWwnNZrW-kQUo5E/view?usp=sharing" width="500" height="500" allowfullscreen></iframe>
-
-        </Modal>
 
         <div class="aboutmewrapper">
 
@@ -280,9 +307,26 @@
 			</div>
 
             
-            <div class="resume-button">
-                <!-- svelte-ignore event_directive_deprecated -->
-                <button style="cursor:pointer; color:white; border:1px solid white; border-radius: 5px; padding: 1rem;" on:click={() => showResume.set(true)}>My resume</button>
+            <div class="buttons-wrapper">
+				<div class="button-select">
+					<!-- svelte-ignore event_directive_deprecated -->
+					<button class="resume-buttom" style="cursor:pointer; color:white; border:1px solid white; border-radius: 5px; padding: 1rem;" on:click={() => showResume.set(true)}>
+						<div class="button-inside">
+							<BookOpenOutline></BookOpenOutline>
+							<div class="button-text">Resume</div>
+						</div>
+					</button>
+				</div>
+				<div class="button-select">
+					<button style="cursor:pointer; color:white; border:1px solid white; border-radius: 5px; padding: 1rem;">
+						<a href="https://www.linkedin.com/in/rehaananjaria/" target="_blank">
+							<div class="button-inside">
+								<ProfileCardOutline/>
+								<div class="button-text">LinkedIn</div>
+							</div>
+						</a>
+					</button>
+				</div>
             </div>
 
         </div>

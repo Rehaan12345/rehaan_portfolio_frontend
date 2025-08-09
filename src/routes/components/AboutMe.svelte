@@ -34,7 +34,7 @@
 </script>
 
 <style>
-	.quoteimgwrapper {
+	/* .quoteimgwrapper {
 		display: flex;
 		justify-content: space-around;
 		gap: 2rem;
@@ -62,7 +62,50 @@
 		.rehaanimg {
 			max-width: 60px;
 		}
-	}
+	} */
+
+	 .quoteimgwrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Text styling */
+.quoteimgwrapper .abt-txt {
+  max-width: 500px;
+}
+
+/* Image styling */
+.quoteimgwrapper .rehaanimg {
+  max-width: 200px;
+  height: auto;
+  border-radius: 10%;
+}
+
+/* For tablets and below */
+@media (max-width: 768px) {
+  .quoteimgwrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+  .quoteimgwrapper .abt-txt {
+    font-size: 1.25rem; /* smaller text */
+    max-width: 90%;
+  }
+  .quoteimgwrapper .rehaanimg {
+    max-width: 120px;
+  }
+}
+
+/* For small phones */
+@media (max-width: 480px) {
+  .quoteimgwrapper .abt-txt {
+    font-size: 1rem;
+  }
+  .quoteimgwrapper .rehaanimg {
+    max-width: 100px;
+  }
+}
 </style>
 
 {#if $ready}
@@ -70,11 +113,11 @@
 	<Section name="testimonial">
 		<Testimonial Icon={Quotes}>
 			<div class="quoteimgwrapper">
-				<blockquote class="quote">
+				<!-- <blockquote class="quote"> -->
 					<p class="abt-txt text-2xl font-medium text-gray-300">
 						{displayedInfo}
 					</p>
-				</blockquote>
+				<!-- </blockquote> -->
 				<img class="rehaanimg" src="https://firebasestorage.googleapis.com/v0/b/droneworks-14880.appspot.com/o/goodpfp.png?alt=media&token=d203dde8-d9ac-4101-a96f-0bacad845d0f" alt="RehaanAnjaria">
 			</div>
 			

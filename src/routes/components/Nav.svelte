@@ -75,6 +75,9 @@
                     <a href="#{c}">{c}</a>
                 </div>
             {/each}
+            <div class="nav-el">
+                <a href="#Contact">Contact</a>
+            </div>
         </div>
     {/if}
 </div>

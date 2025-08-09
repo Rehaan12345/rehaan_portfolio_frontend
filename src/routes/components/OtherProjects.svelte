@@ -1,4 +1,5 @@
 <script lang="js">
+	//@ts-nocheck
 	import { onMount } from "svelte";
 	import { Section, TeamWrapper, TeamHeader, TeamBody, TeamItem } from 'flowbite-svelte-blocks';
 	import { writable } from "svelte/store";
@@ -16,7 +17,7 @@
 			const temp = {
 				href: curr.link,
 				target: "_blank",
-				src: curr.link,
+				src: curr.src,
 				alt: curr.title,
 				name: curr.title,
 				jobTitle: "",
@@ -26,54 +27,24 @@
 		}
 		ready.set(true);
 	});
-
-	// let members = [
-	// 	{
-	// 		href: '/',
-	// 		src: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png',
-	// 		alt: 'Bonnie Green',
-	// 		name: 'Bonnie Green',
-	// 		jobTitle: 'CEO & Web Developer',
-	// 		description: 'Bonnie drives the technical strategy of the flowbite platform and brand.'
-	// 	},
-	// 	{
-	// 		href: '/',
-	// 		src: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png',
-	// 		alt: 'Jese Leos',
-	// 		name: 'Jese Leos',
-	// 		jobTitle: 'CTO',
-	// 		description: 'Jese drives the technical strategy of the flowbite platform and brand.'
-	// 	},
-	// 	{
-	// 		href: '/',
-	// 		src: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png',
-	// 		alt: 'Michael Gouch',
-	// 		name: 'Michael Gouch',
-	// 		jobTitle: 'Senior Front-end Developer',
-	// 		description: 'Michael drives the technical strategy of the flowbite platform and brand'
-	// 	},
-	// 	{
-	// 		href: '/',
-	// 		src: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/sofia-mcguire.png',
-	// 		alt: 'Lana Byrd',
-	// 		name: 'Lana Byrd',
-	// 		jobTitle: 'Marketing & Sale',
-	// 		description: 'Lana drives the technical strategy of the flowbite platform and brand.'
-	// 	}
-	// ];
 </script>
+
+<style>
+	.title-text {
+		color: white;
+		font-size: xx-large;
+	}
+</style>
 
 {#if $ready}
 
 	<Section name="team">
+		<h2 class="title-text">Other Projects</h2>
 		<TeamWrapper>
-			<TeamHeader>
-				{#snippet label()}Other Projects{/snippet}
-			</TeamHeader>
 			<TeamBody>
 				{#each otherProjects as { href, src, alt, name, jobTitle, description }}
 					<TeamItem {href} {src} {alt} {name} {jobTitle}>
-						<p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">
+						<p class="mt-3 mb-4 font-light text-gray-400">
 							{description}
 						</p>
 					</TeamItem>

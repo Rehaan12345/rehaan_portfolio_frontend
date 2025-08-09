@@ -1,4 +1,5 @@
 <script>
+	//@ts-nocheck
 	import { onMount } from "svelte";
 	import { Section, ArticleAuthor, ArticleBody, ArticleHead, ArticleWrapper, BlogHead, BlogBodyWrapper } from 'flowbite-svelte-blocks';
 	import { Button, Popover, Modal, Card } from "flowbite-svelte";
@@ -84,6 +85,7 @@
 		display: flex;
 		justify-content: center;
 	}
+
 	.wholeclubwrapper {
 		display: flex;
 		flex-direction: column;
@@ -110,6 +112,12 @@
 		gap: 1rem;
 		align-items: center;
 		width: 1fr;
+	}
+
+	.title-txt-wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 
 	.card-contents {
@@ -189,7 +197,7 @@
 	</Popover>
 
 	<Section name="blog">
-		<h2 class="title-text">My Projects</h2>
+		<h2 class="title-text">Projects</h2>
 		<p style="color: white;"><i>(Hover over the title to view more pictures from each project)</i></p>
 		<div class="outer-container">
 		<div class="wholeclubwrapper">
@@ -203,9 +211,11 @@
 									<Card size="xl" img={p.images[0]} class="rounded-lg overflow-hidden">
 										<div class="card-contents" role="button" tabindex="0">
 											<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-												<a on:mouseover={() => {currHover = p}} on:focus={() => {currHover = p}} class="title" id="about" href="">
-													{p.title}
-												</a><ArrowUpRightFromSquareOutline class="shrink-0 h-6 w-6" />
+												<div class="title-txt-wrapper">
+													<a on:mouseover={() => {currHover = p}} on:focus={() => {currHover = p}} class="title" id="about" href="">
+														{p.title}
+													</a><ArrowUpRightFromSquareOutline class="shrink-0 h-6 w-6" />
+												</div>
 											</h5>
 											<p class="about mb-5 font-light text-gray-800">{p.about}</p>
 											<div class="github-links-wrapper">
