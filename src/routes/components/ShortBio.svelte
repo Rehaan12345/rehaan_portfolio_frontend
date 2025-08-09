@@ -5,7 +5,6 @@
     import { Section, Schedule, ScheduleItem } from 'flowbite-svelte-blocks';
 	import { getDocuments } from "$lib/model";
     import { writable } from "svelte/store"
-	import { read } from '$app/server';
 
     let ready = writable(false);
 
