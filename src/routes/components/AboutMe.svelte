@@ -64,7 +64,7 @@
 		}
 	} */
 
-	 .quoteimgwrapper {
+.quoteimgwrapper {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -106,7 +106,17 @@
     max-width: 100px;
   }
 }
-</style>
+	.rehaanimg {
+		transition: all 0.3s ease-in-out;
+	}
+
+	.rehaanimg:hover {
+		transform: scale(1.02);
+		transition: all ease-in-out 0.2s;
+		box-shadow:white;
+	}
+  
+  </style>
 
 {#if $ready}
 
@@ -118,7 +128,11 @@
 						{displayedInfo}
 					</p>
 				<!-- </blockquote> -->
-				<img class="rehaanimg" src="https://firebasestorage.googleapis.com/v0/b/droneworks-14880.appspot.com/o/goodpfp.png?alt=media&token=d203dde8-d9ac-4101-a96f-0bacad845d0f" alt="RehaanAnjaria">
+         <a href="https://www.linkedin.com/in/rehaananjaria/" target="_blank">
+          <div class="imgwrapper">
+				    <img class="rehaanimg" src="https://firebasestorage.googleapis.com/v0/b/droneworks-14880.appspot.com/o/goodpfp.png?alt=media&token=d203dde8-d9ac-4101-a96f-0bacad845d0f" alt="RehaanAnjaria">
+          </div>
+        </a>
 			</div>
 			
 			<!-- {#snippet footer()}
