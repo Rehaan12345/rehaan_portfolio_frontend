@@ -3,9 +3,9 @@
     import Main from "./components/Main.svelte";
 	import { Spinner } from "flowbite-svelte";
 
-	onMount(() => {
-		FlexMasonry.init('.grid');
-	})
+	// onMount(() => {
+	// 	FlexMasonry.init('.grid');
+	// })
 </script>
 
 <style>

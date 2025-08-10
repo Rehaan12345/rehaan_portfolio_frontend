@@ -148,6 +148,7 @@
 		font-size: medium;
 		font-style: italic;
 		color: maroon;
+		z-index: 200;
 	}
 
 	.gh-link:hover {
@@ -223,13 +224,13 @@
 											<p class="about mb-5 font-light text-gray-800">{p.about}</p>
 											<div class="github-links-wrapper">
 												<div class="gh-link">
-													{#if p["github-link-frontend"].length > 1}
-														<a href={p["github-link-frontend"]} target="_blank">View Frontend </a>
+													{#if p["github-link-frontend"].length > 2}
+														<a href={p["github-link-frontend"]} on:click|stopPropagation target="_blank">View Frontend </a>
 													{/if}
 												</div>
 												<div class="gh-link">
-													{#if p["github-link-backend"].length > 1}
-														<a href={p["github-link-backend"]} target="_blank">View Backend</a>
+													{#if p["github-link-backend"].length > 2}
+														<a href={p["github-link-backend"]} on:click|stopPropagation target="_blank">View Backend</a>
 													{/if}
 												</div>
 											</div>
