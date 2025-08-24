@@ -317,7 +317,7 @@
 				<div class="button-select">
 					<!-- svelte-ignore event_directive_deprecated -->
 					<button class="resume-buttom" style="cursor:pointer; color:white; border:1px solid white; border-radius: 5px; padding: 1rem;" on:click={() => showResume.set(true)}>
-						<a href="/RehaanAnjaria.jpg" target="_blank">
+						<a href="/RehaanAnjaria.png" target="_blank">
 							<div class="button-inside">
 								<BookOpenOutline></BookOpenOutline>
 								<div class="button-text">Resume</div>
